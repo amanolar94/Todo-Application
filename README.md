@@ -8,6 +8,8 @@ NodeJs with ExpressJs framework for the backend  and MySql for storing the tasks
 To execute the application just run ``` npm install ``` and ``` npm start ``` inside the folders
  ```application-back-end``` and ```application-front-end```.
 
+**You may also need to change your database credentials inside  application-back-end/dbconnect.js**
+
 ## The application on the backend is served from the files:
 * models/task.js
 * routes/task.js
@@ -16,4 +18,3 @@ To execute the application just run ``` npm install ``` and ``` npm start ``` in
 ## The application on the frontend is served from the files inside the src folder
 
 
-**You may also need to change your database credentials inside  application-back-end/dbconnect.js**
