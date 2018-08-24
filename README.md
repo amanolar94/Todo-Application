@@ -9,9 +9,9 @@ To execute the application just run ``` npm install ``` and ``` npm start ``` in
  ```application-back-end``` and ```application-front-end```.
 
 ## The application on the backend is served from the files:
-*models/task.js
-*routes/task.js
-*dbconnect.js (for the connection to the database)
+* models/task.js
+* routes/task.js
+* dbconnect.js (for the connection to the database)
 
 ## The application on the frontend is served from the files inside the src folder
 
