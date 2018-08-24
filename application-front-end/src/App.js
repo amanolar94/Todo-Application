@@ -1,10 +1,12 @@
 import React from 'react'
 import Main from './Main'
-// import './css/app.css'
+import Header from './Header'
+import './css/main.css'
 
 const App = () => (
-  <div>
-      <Main />
+  <div className="mainContainer">
+    <Header />
+    <Main />
   </div>
 )
 

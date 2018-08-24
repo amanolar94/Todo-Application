@@ -4,11 +4,10 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App';
 
 
-const title = 'My Minimal React Webpack Babel Setup';
 
 ReactDOM.render((
   <BrowserRouter>
-    <div>
+    <div style={{}}>
       <App />
     </div>
     

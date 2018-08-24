@@ -1,0 +1,24 @@
+.mainContainer{
+
+    border: 1px solid black;
+    width: 50%;
+    height: 70%;
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);    
+}
+
+.header{
+    background-color: #102145;
+}
+
+.headerTitle{
+
+    text-align: center;
+    padding: 20px;
+    margin: 0px;
+    color: #fff;
+
+}
