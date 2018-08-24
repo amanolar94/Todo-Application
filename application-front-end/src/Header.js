@@ -1,23 +1,41 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './css/main.css'
-import Input from './reusableComponents/input'
-import Button from './reusableComponents/button'
-import headerStyles from './styles/headerStyles'
 
-const Header = () => (
-    <div className="header">
-        <h2 className="headerTitle" >My To Do List</h2>
-        <span>
-            <Input 
-            placeholder='New Task'
-            style={ headerStyles.inputField }
-            />
-        </span>
-        <Button
-          buttonText = 'Add'
-          style = { headerStyles.addButton }
-        />
-    </div>
-);
+export default class Header extends Component {
+    
+    constructor(props){
+        super(props);
+        this.state = {
+            newTask : ''
+        };
 
-export default Header
+        
+
+    };
+
+
+    render(){
+        return(
+            
+            <div className="header">
+                <h2 className="headerTitle" >My To Do List</h2>
+                
+            </div>
+
+        );
+    }
+}
+
+// const Header = () => (
+//     <div className="header">
+//         <h2 className="headerTitle" >My To Do List</h2>
+//         <Input 
+//             placeholder='New Task'
+//             value = ''
+//             style={ new Array(headerStyles.inputField) }
+//             buttonText = {'Add'}
+//         />
+//     </div>
+// );
+
+// export default Header
