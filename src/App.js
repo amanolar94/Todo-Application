@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { useDispatch } from "react-redux";
+import { getAllTodos } from "./features/Todo/TodoListSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllTodos());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <header className="App-header">
