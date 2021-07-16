@@ -1,7 +1,7 @@
 import { css } from "@emotion/css";
 
 export const app = css`
-  background-color: #0b7a75;
+  background-color: #19535f;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,21 +19,37 @@ export const paper = css`
     width: 100%;
   }
   @media (min-width: 769px) {
-    min-width: 600px;
+    width: 700px;
     min-height: 400px;
   }
 `;
 
 export const header = css`
-  color: #0b7a75;
+  color: #19535f;
 `;
 
-export const todoItem = css`
+export const formContainer = css`
   width: 100%;
-  padding: 10px 10px;
+  margin-bottom: 10px;
   display: flex;
-  align-items: center;
   @media (max-width: 768px) {
     width: 90%;
+    flex-wrap: wrap;
+  }
+`;
+
+export const todoInput = css``;
+
+export const dateInput = css`
+  margin-left: 5px !important;
+  width: 30%;
+`;
+
+export const saveButton = css`
+  margin-left: auto !important;
+  width: 30%;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 10px !important;
   }
 `;

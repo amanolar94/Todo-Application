@@ -8,3 +8,7 @@ export const getAllTodosFromLocalStorage = () => {
   }
   return JSON.parse(todos);
 };
+
+export const saveTodosToLocalStorage = todos => {
+  localStorage.setItem("todos", JSON.stringify(todos));
+};
