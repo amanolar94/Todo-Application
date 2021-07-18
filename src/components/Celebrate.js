@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { soberUp } from "../features/Todo/TodoListSlice";
 import useWindowSize from "../hooks/useWindowSize";
 
-export default () => {
+const Celebrate = () => {
   const dispatch = useDispatch();
 
   const { width, height } = useWindowSize();
@@ -23,3 +23,5 @@ export default () => {
     />
   );
 };
+
+export default Celebrate;

@@ -6,7 +6,7 @@ export const todoItem = css`
   display: flex;
   align-items: center;
   margin-bottom: 5px;
-  cursor: pointer;
+  margin-top: 5px;
   &:hover {
     transform: scale(1.01);
   }
@@ -18,6 +18,10 @@ export const todoItem = css`
 
 export const todoTitle = css`
   overflow-wrap: anywhere;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 `;
 export const deadline = css`
   margin-left: auto;

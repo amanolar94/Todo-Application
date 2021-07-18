@@ -3,7 +3,7 @@ import { Paper } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { app, header, paper, formWrapper } from "./css";
 import TodoItem from "../../components/TodoItem";
-import { addTodo, completeTodo, removeTodo } from "./TodoListSlice";
+import { addTodo, completeTodo, editTodo, removeTodo } from "./TodoListSlice";
 import Celebrate from "../../components/Celebrate";
 import TodoForm from "../../components/todoForm";
 
@@ -31,6 +31,13 @@ function TodoList() {
     [dispatch]
   );
 
+  const handleEdit = useCallback(
+    values => {
+      dispatch(editTodo(values));
+    },
+    [dispatch]
+  );
+
   const toggleTodo = useCallback(
     id => {
       dispatch(completeTodo(id));
@@ -48,10 +55,9 @@ function TodoList() {
         {sortedTodos.map(item => (
           <TodoItem
             key={item.id}
-            id={item.id}
             title={item.todo}
             onDelete={() => deleteTodo(item.id)}
-            onEdit={console.log}
+            onEdit={todo => handleEdit({ ...todo, id: item.id })}
             onToggle={() => toggleTodo(item.id)}
             dueDate={item.dueDate}
             completed={item.completed}

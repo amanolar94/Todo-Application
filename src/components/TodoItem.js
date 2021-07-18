@@ -5,12 +5,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import { todoTitle, deadline, todoItem } from "./css";
 import TodoForm from "./todoForm";
-import { useDispatch } from "react-redux";
-import { editTodo } from "../features/Todo/TodoListSlice";
 
 function TodoItem(props) {
   const [edit, setEdit] = useState(false);
-  const dispatch = useDispatch();
+
   const handleEdit = useCallback(
     e => {
       e.stopPropagation();
@@ -29,20 +27,14 @@ function TodoItem(props) {
 
   const handleSubmit = useCallback(
     values => {
-      dispatch(
-        editTodo({
-          todo: values.todo || props.title,
-          dueDate: values.dueDate || props.dueDate,
-          id: props.id
-        })
-      );
+      props.onEdit({ todo: values.todo || props.title, dueDate: values.dueDate || props.dueDate });
       setEdit(false);
     },
-    [props, dispatch]
+    [props]
   );
 
   return (
-    <Paper onClick={props.onToggle} className={todoItem}>
+    <Paper className={todoItem}>
       {edit ? (
         <TodoForm
           todo={props.title}
@@ -52,8 +44,14 @@ function TodoItem(props) {
         />
       ) : (
         <React.Fragment>
-          <Checkbox checked={props.completed} inputProps={{ "aria-label": "primary checkbox" }} />
-          <div className={todoTitle}>{props.title}</div>
+          <Checkbox
+            onChange={props.onToggle}
+            checked={props.completed}
+            inputProps={{ "aria-label": "primary checkbox" }}
+          />
+          <div onClick={props.onToggle} className={todoTitle}>
+            {props.title}
+          </div>
           <div className={deadline}>{props.dueDate}</div>
           <IconButton onClick={handleEdit} aria-label="delete">
             <EditIcon color="primary" />
@@ -69,7 +67,6 @@ function TodoItem(props) {
 
 TodoItem.propTypes = {
   title: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
