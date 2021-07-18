@@ -6,6 +6,10 @@ export const todoItem = css`
   display: flex;
   align-items: center;
   margin-bottom: 5px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.01);
+  }
   @media (max-width: 768px) {
     width: 90%;
   }

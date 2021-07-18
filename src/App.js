@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getAllTodos } from "./features/Todo/TodoListSlice";
+import { getAllTodos, getCelebration } from "./features/Todo/TodoListSlice";
 import TodoList from "./features/Todo/TodoList";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 
@@ -20,6 +20,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getAllTodos());
+    dispatch(getCelebration());
   }, [dispatch]);
 
   return (

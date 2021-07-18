@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllTodosFromLocalStorage, saveTodosToLocalStorage } from "./todoStorage";
+import {
+  getAllTodosFromLocalStorage,
+  getCelebrationFromLocalStorage,
+  getToday,
+  getTomorrow,
+  saveCelebrationToLocalStorage,
+  saveTodosToLocalStorage
+} from "./todoStorage";
 
 let idCreate = () => {
   return Math.floor((1 + Math.random()) * 0x10000)
@@ -7,7 +14,10 @@ let idCreate = () => {
     .substring(1);
 };
 
-const initialState = { todos: [] };
+const initialState = {
+  todos: [],
+  celebration: { todos: [], date: getToday(), canCelebrate: false }
+};
 
 export const todoSlice = createSlice({
   name: "todo",
@@ -30,23 +40,51 @@ export const todoSlice = createSlice({
       state.todos = todos;
     },
     completeTodo: (state, data) => {
+      const todo = state.todos.find(todo => todo.id === data.payload);
+
       const todos = state.todos.map(todo => {
         if (todo.id === data.payload) {
           return { ...todo, completed: !todo.completed };
         }
         return todo;
       });
+      //We check if we in the current date, if the task isn't one that has already been completed and if the toogle comes from completion
+      if (
+        state.celebration.date === getToday() &&
+        state.celebration.todos.findIndex(td => td === data.payload) === -1 &&
+        !todo.completed === true
+      ) {
+        const newTodos = [...state.celebration.todos, data.payload];
+        const celebration = {
+          date: state.celebration.date,
+          todos: newTodos,
+          canCelebrate: newTodos.length === 3
+        };
+        state.celebration = celebration;
+        saveCelebrationToLocalStorage(celebration);
+      }
 
       saveTodosToLocalStorage(todos);
       state.todos = todos;
     },
+    //After we celebrate from 3 daily tasks completed we set the date to next day and the goal is reseted
+    soberUp: state => {
+      const celebration = { date: getTomorrow(), todos: [], canCelebrate: false };
+      state.celebration = celebration;
+      saveCelebrationToLocalStorage(celebration);
+    },
     getAllTodos: state => {
       const todos = getAllTodosFromLocalStorage();
       state.todos = todos;
+    },
+    getCelebration: state => {
+      const celebration = getCelebrationFromLocalStorage();
+      state.celebration = celebration;
     }
   }
 });
 
-export const { addTodo, removeTodo, completeTodo, getAllTodos } = todoSlice.actions;
+export const { addTodo, removeTodo, completeTodo, getAllTodos, soberUp, getCelebration } =
+  todoSlice.actions;
 
 export default todoSlice.reducer;

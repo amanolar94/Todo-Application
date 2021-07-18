@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { app, header, paper, formContainer, dateInput, saveButton, todoInput } from "./css";
 import TodoItem from "../../components/TodoItem";
 import { addTodo, completeTodo, removeTodo } from "./TodoListSlice";
+import Celebrate from "../../components/Celebrate";
 
 function TodoList() {
   const [todo, setTodo] = useState("");
@@ -11,6 +12,7 @@ function TodoList() {
   const dispatch = useDispatch();
 
   const todos = useSelector(state => state.todos.todos);
+  const celebration = useSelector(state => state.todos.celebration);
 
   const sortedTodos = [...todos].sort(
     (item1, item2) => new Date(item1.dueDate || 0) - new Date(item2.dueDate || 0)
@@ -90,6 +92,7 @@ function TodoList() {
           />
         ))}
       </Paper>
+      {celebration.canCelebrate && <Celebrate />}
     </div>
   );
 }
