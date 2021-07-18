@@ -1,14 +1,13 @@
-import React, { useCallback, useState } from "react";
-import { Button, Paper, TextField } from "@material-ui/core";
+import React, { useCallback } from "react";
+import { Paper } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { app, header, paper, formContainer, dateInput, saveButton, todoInput } from "./css";
+import { app, header, paper, formWrapper } from "./css";
 import TodoItem from "../../components/TodoItem";
 import { addTodo, completeTodo, removeTodo } from "./TodoListSlice";
 import Celebrate from "../../components/Celebrate";
+import TodoForm from "../../components/todoForm";
 
 function TodoList() {
-  const [todo, setTodo] = useState("");
-  const [dueDate, setDueDate] = useState("");
   const dispatch = useDispatch();
 
   const todos = useSelector(state => state.todos.todos);
@@ -19,16 +18,10 @@ function TodoList() {
   );
 
   const handleSubmit = useCallback(
-    e => {
-      e.preventDefault();
-      console.log("here");
-      if (todo !== "") {
-        dispatch(addTodo({ todo, dueDate }));
-        setTodo("");
-        setDueDate("");
-      }
+    values => {
+      dispatch(addTodo(values));
     },
-    [todo, dueDate, dispatch]
+    [dispatch]
   );
 
   const deleteTodo = useCallback(
@@ -49,40 +42,13 @@ function TodoList() {
     <div className={app}>
       <Paper className={paper}>
         <h2 className={header}>Todo List</h2>
-        <form onSubmit={handleSubmit} className={formContainer}>
-          <TextField
-            onChange={e => setTodo(e.currentTarget.value)}
-            className={todoInput}
-            id="standard-basic"
-            label="Add Todo"
-            value={todo}
-          />
-          <TextField
-            value={dueDate}
-            id="date"
-            label="Add Due Date"
-            type="date"
-            className={dateInput}
-            InputLabelProps={{
-              shrink: true
-            }}
-            onChange={e => setDueDate(e.target.value)}
-          />
-          <Button
-            type="submit"
-            onSubmit={handleSubmit}
-            disabled={todo === ""}
-            className={saveButton}
-            variant="contained"
-            color="primary"
-          >
-            Save
-          </Button>
-        </form>
-
+        <div className={formWrapper}>
+          <TodoForm onSubmit={handleSubmit} />
+        </div>
         {sortedTodos.map(item => (
           <TodoItem
             key={item.id}
+            id={item.id}
             title={item.todo}
             onDelete={() => deleteTodo(item.id)}
             onEdit={console.log}

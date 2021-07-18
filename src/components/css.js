@@ -25,3 +25,37 @@ export const deadline = css`
   color: #2d8da1;
   font-size: 0.9em;
 `;
+
+export const formContainer = css`
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const todoInput = css``;
+
+export const dateInput = css`
+  margin-left: 5px !important;
+  width: 30%;
+`;
+
+export const saveButton = css`
+  margin-left: auto !important;
+  width: 100%;
+  margin-top: 10px !important;
+`;
+
+export const cancelButton = css`
+  margin-left: auto !important;
+  width: 100%;
+`;
+
+export const buttonWrapper = css`
+  width: 30%;
+  margin-left: auto !important;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 10px !important;
+  }
+`;

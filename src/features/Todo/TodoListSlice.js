@@ -34,11 +34,13 @@ export const todoSlice = createSlice({
       saveTodosToLocalStorage(todos);
       state.todos = todos;
     },
+
     removeTodo: (state, data) => {
       const todos = state.todos.filter(todo => todo.id !== data.payload);
       saveTodosToLocalStorage(todos);
       state.todos = todos;
     },
+
     completeTodo: (state, data) => {
       const todo = state.todos.find(todo => todo.id === data.payload);
 
@@ -67,12 +69,22 @@ export const todoSlice = createSlice({
       saveTodosToLocalStorage(todos);
       state.todos = todos;
     },
+
     //After we celebrate from 3 daily tasks completed we set the date to next day and the goal is reseted
     soberUp: state => {
       const celebration = { date: getTomorrow(), todos: [], canCelebrate: false };
       state.celebration = celebration;
       saveCelebrationToLocalStorage(celebration);
     },
+
+    editTodo: (state, data) => {
+      const { id, ...todo } = data.payload;
+      const index = state.todos.findIndex(item => item.id === id);
+      if (index > -1) {
+        state.todos[index] = { ...state.todos[index], ...todo };
+      }
+    },
+
     getAllTodos: state => {
       const todos = getAllTodosFromLocalStorage();
       state.todos = todos;
@@ -84,7 +96,7 @@ export const todoSlice = createSlice({
   }
 });
 
-export const { addTodo, removeTodo, completeTodo, getAllTodos, soberUp, getCelebration } =
+export const { addTodo, removeTodo, completeTodo, getAllTodos, soberUp, getCelebration, editTodo } =
   todoSlice.actions;
 
 export default todoSlice.reducer;

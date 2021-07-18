@@ -28,28 +28,10 @@ export const header = css`
   color: #19535f;
 `;
 
-export const formContainer = css`
+export const formWrapper = css`
   width: 100%;
-  margin-bottom: 10px;
-  display: flex;
   @media (max-width: 768px) {
     width: 90%;
     flex-wrap: wrap;
-  }
-`;
-
-export const todoInput = css``;
-
-export const dateInput = css`
-  margin-left: 5px !important;
-  width: 30%;
-`;
-
-export const saveButton = css`
-  margin-left: auto !important;
-  width: 30%;
-  @media (max-width: 768px) {
-    width: 100%;
-    margin-top: 10px !important;
   }
 `;
